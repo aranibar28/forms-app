@@ -1,1 +1,86 @@
-<p>dinamics works!</p>
+<h3>Reactive: Dinámicos</h3>
+<hr />
+
+<form autocomplete="off" (ngSubmit)="guardar()" [formGroup]="myForm">
+  <!-- Agregar Nombre -->
+  <div class="row mb-4">
+    <label class="col-sm-3 col-form-label">Nombre</label>
+    <div class="col-sm-9">
+      <input
+        type="text"
+        class="form-control"
+        formControlName="name"
+        placeholder="Nombre"
+      />
+      <small *ngIf="fieldsValid('name')" class="form-text text-danger">
+        Debe ser de 3 carácteres
+      </small>
+    </div>
+  </div>
+
+  <!-- Agregar Favorito -->
+  <div class="row mb-3">
+    <label class="col-sm-3 col-form-label">Agregar</label>
+    <div class="col-sm-9">
+      <div class="input-group">
+        <input
+          class="form-control"
+          [formControl]="newFavorite"
+          placeholder="Agregar favorito"
+          (keyup.enter)="addFavorite()"
+        />
+        <button
+          class="btn btn-outline-primary"
+          (click)="addFavorite()"
+          type="button"
+        >
+          Agregar
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Lista de Juegos Favoritos -->
+  <div class="mb-3 row">
+    <label class="col-sm-3 col-form-label">Favoritos</label>
+    <div class="col-sm-9" formArrayName="favorites">
+      <div
+        *ngFor="let favorite of favoritesArray.controls; let i = index"
+        class="input-group mb-1"
+      >
+        <input [formControlName]="i" class="form-control" required />
+        <button
+          class="btn btn-outline-danger"
+          (click)="borrar(i)"
+          type="button"
+        >
+          Eliminar
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-12">
+      <button type="submit" class="btn btn-primary float-end">Guardar</button>
+    </div>
+  </div>
+</form>
+
+<div class="row">
+  <div class="col">
+    <div>
+      <span>Valid: {{ myForm.valid }}</span>
+    </div>
+    <div>
+      <span>Pristine: {{ myForm.pristine }}</span>
+    </div>
+    <div>
+      <span>Touched: {{ myForm.touched }}</span>
+    </div>
+  </div>
+  <div class="col">
+    <span>Value</span>
+    <pre>{{ myForm.value | json }}</pre>
+  </div>
+</div>
