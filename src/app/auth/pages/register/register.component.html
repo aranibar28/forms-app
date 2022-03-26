@@ -1,0 +1,116 @@
+<h3>Valiaciones Reactivas</h3>
+<hr />
+<div class="row">
+  <div class="col">
+    <form autocomplete="off" (ngSubmit)="submitForm()" [formGroup]="myForm">
+      <!-- Nombre -->
+      <div class="row mb-3">
+        <label class="col-sm-3 col-form-label">Nombre</label>
+        <div class="col-sm-9">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Nombre"
+            formControlName="nombre"
+          />
+          <small *ngIf="fieldsValid('nombre')" class="form-text text-danger">
+            Debe ser en formato de nombre y apellido.
+          </small>
+        </div>
+      </div>
+
+      <!-- Email -->
+      <div class="row mb-3">
+        <label class="col-sm-3 col-form-label">Email</label>
+        <div class="col-sm-9">
+          <input
+            type="email"
+            class="form-control"
+            placeholder="Email"
+            formControlName="email"
+          />
+          <small *ngIf="fieldsValid('email')" class="form-text text-danger">
+            {{ emailMSG }}
+          </small>
+        </div>
+      </div>
+
+      <!-- Username -->
+      <div class="row mb-3">
+        <label class="col-sm-3 col-form-label">Username</label>
+        <div class="col-sm-9">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Username"
+            formControlName="username"
+          />
+          <small *ngIf="fieldsValid('username')" class="form-text text-danger">
+            El username no puede ser strider
+          </small>
+        </div>
+      </div>
+
+      <!-- Password -->
+      <div class="row mb-3">
+        <label class="col-sm-3 col-form-label">Password</label>
+        <div class="col-sm-9">
+          <input
+            type="password"
+            class="form-control"
+            placeholder="Password del Usuario"
+            formControlName="password1"
+          />
+          <small *ngIf="fieldsValid('password1')" class="form-text text-danger">
+            La contraseña debe ser mayor de 6 carácteres
+          </small>
+        </div>
+      </div>
+
+      <!-- Confirmar Password -->
+      <div class="row mb-3">
+        <label class="col-sm-3 col-form-label">Confirmar Password</label>
+        <div class="col-sm-9">
+          <input
+            type="password"
+            class="form-control"
+            placeholder="Password del Usuario"
+            formControlName="password2"
+          />
+          <small *ngIf="fieldsValid('password2')" class="form-text text-danger">
+            Las contraseñas deben ser iguales
+          </small>
+        </div>
+      </div>
+
+      <!-- Button Guardar -->
+      <div class="row">
+        <div class="col">
+          <button
+            type="submit"
+            class="btn btn-primary float-end"
+            [disabled]="myForm.pending"
+          >
+            Guardar
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col">
+    <span>Value</span>
+    <pre>{{ myForm.value | json }}</pre>
+  </div>
+  <div class="col">
+    <div>Status: {{ myForm.status }}</div>
+    <div>Valid: {{ myForm.valid }}</div>
+    <div>Touched: {{ myForm.touched }}</div>
+    <br />
+    <div>Email: {{ myForm.controls["email"]?.errors | json }}</div>
+    <div>Password 1: {{ myForm.controls["password1"]?.errors | json }}</div>
+    <div>Password 2: {{ myForm.controls["password2"]?.errors | json }}</div>
+  </div>
+</div>

@@ -52,7 +52,8 @@ export class DinamicsComponent {
       return;
     }
     console.log(this.myForm.value);
-    this.myForm.reset();
+    this.myForm.reset(); // Para limpiar los campos
+    this.favoritesArray.clear(); // Para limpiar el arreglo despues de postear
   }
 
   borrar(i:number) {

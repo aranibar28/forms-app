@@ -25,3 +25,18 @@
     {{ item.tittle }}
   </li>
 </ul>
+
+<br />
+
+<h3>Validaciones</h3>
+<hr />
+<ul class="list-group">
+  <li
+    *ngFor="let item of authMenu"
+    class="list-group-item list-group-item-action"
+    routerLinkActive="active"
+    [routerLink]="item.route"
+  >
+    {{ item.tittle }}
+  </li>
+</ul>
